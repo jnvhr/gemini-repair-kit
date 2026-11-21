@@ -1,0 +1,11 @@
+# Never commit proprietary Google binaries or local backups
+original-backup/
+original-backup-*/
+*.backup
+*.orig
+_CodeSignature/
+
+# macOS & Python artifacts
+.DS_Store
+__pycache__/
+*.py[cod]
