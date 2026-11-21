@@ -1,0 +1,30 @@
+.gitignore
+  h_6ac395ed6ac44d 1-11
+LICENSE
+  h_6ac395ed6ac44d 1-21
+README.md
+  h_6ac395ed6ac44d 1-58
+SHA256SUMS
+  h_6ac395ed6ac44d 1-10
+restore_gemini.py
+  h_6ac395ed6ac44d 1-144
+scripts/apply_ui_patches.py
+  h_6ac395ed6ac44d 1-59
+scripts/gemini_entitlements.plist
+  h_6ac395ed6ac44d 1-24
+scripts/patch_gemini.py
+  h_6ac395ed6ac44d 1-149
+scripts/update_patch3d.py
+  h_6ac395ed6ac44d 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d9afae9a1c64036270e831ae0e2ab0c800ec8cb1",
+  "prompts": {},
+  "humans": {
+    "h_6ac395ed6ac44d": {
+      "author": "Janvher Lucas Sarmiento <jnvhr@MacBook-Air.local>"
+    }
+  }
+}
