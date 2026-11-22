@@ -1,0 +1,18 @@
+README.md
+  h_6ac395ed6ac44d 8,26,36,80-88,97,110-111,161,163-169,189
+SHA256SUMS
+  h_6ac395ed6ac44d 4,9
+scripts/patch_gemini.py
+  h_6ac395ed6ac44d 11-12,15,22,26-34,37-84,90-92,97-102,111,134,165
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3e6c5796d1f4e6e576b17cfc701775eba51f8a2c",
+  "prompts": {},
+  "humans": {
+    "h_6ac395ed6ac44d": {
+      "author": "Janvher Lucas Sarmiento <jnvhr@MacBook-Air.local>"
+    }
+  }
+}
