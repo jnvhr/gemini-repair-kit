@@ -8,7 +8,7 @@ Fixes included:
 3. Patch 3: Top navigation bar pill clipping & positioning (font scale, icon size, height, top padding).
 4. Patch 4: Account switch / add account hang caused by Clearcut service deadlock against NSUserDefaults notification.
 
-Supports exact offset patching for tested versions (1.147.5.1526, 1.147.6.1557)
+Supports exact offset patching for tested versions (1.147.5.1526, 1.147.6.1557, 1.150.3.1601)
 with unique-pattern fallback for minor future updates.
 """
 
@@ -54,6 +54,15 @@ OFFSETS_BY_VERSION = {
         (0x056E27D4, "e8e702b2a89999f2"),
         (0x0280D7EC, "b971eb94"),
     ],
+    "1.150.3.1601": [
+        (0x03961930, "880407b0"),
+        (0x039320FC, "fd7bbfa9"),
+        (0x06224BAC, "e8e702b2a89999f288fee7f20101679e"),
+        (0x06224BC8, "e8e702b2a89999f288fee7f20101679e"),
+        (0x06224BE8, "e8e702b2a89999f288fee7f2"),
+        (0x06224C20, "e8e702b2a89999f2"),
+        (0x02B8B058, "4576eb94"),
+    ],
 }
 
 
@@ -68,7 +77,7 @@ def get_app_version() -> str:
 
 def build_patch_table(version: str) -> list[dict]:
     """Build the patch table for the installed Gemini.app version."""
-    entries = OFFSETS_BY_VERSION.get(version) or OFFSETS_BY_VERSION["1.147.6.1557"]
+    entries = OFFSETS_BY_VERSION.get(version) or OFFSETS_BY_VERSION["1.150.3.1601"]
     return [
         {
             "name": name,

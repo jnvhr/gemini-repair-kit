@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Community ARM64 binary patches for <code>/Applications/Gemini.app</code> (<code>com.google.GeminiMacOS</code>, tested on <code>1.147.5.1526</code> and <code>1.147.6.1557</code> on macOS 15.8.3) that resolve launch freezes, missing icons and avatars, clipped titlebar pills, and account-switching deadlocks.
+  Community ARM64 binary patches for <code>/Applications/Gemini.app</code> (<code>com.google.GeminiMacOS</code>, tested on <code>1.147.5.1526</code>, <code>1.147.6.1557</code>, and <code>1.150.3.1601</code> on macOS 15.8.3) that resolve launch freezes, missing icons and avatars, clipped titlebar pills, and account-switching deadlocks.
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
   <a href="https://github.com/jnvhr/gemini-repair-kit"><img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github" /></a>
   <img alt="Platform: macOS ARM64" src="https://img.shields.io/badge/platform-macOS_ARM64-111827?style=flat&logo=apple&logoColor=white" />
   <img alt="Tested macOS 15.8.3" src="https://img.shields.io/badge/macOS-15.8.3-0B84F3?style=flat" />
-  <img alt="Gemini.app 1.147.5 / 1.147.6" src="https://img.shields.io/badge/Gemini.app-1.147.5_%7C_1.147.6-4285F4?style=flat" />
+  <img alt="Gemini.app 1.147.5 – 1.150.3" src="https://img.shields.io/badge/Gemini.app-1.147.5_%E2%80%93_1.150.3-4285F4?style=flat" />
   <img alt="Patches: 7 ARM64" src="https://img.shields.io/badge/patches-7_ARM64-16A34A?style=flat" />
   <img alt="Python 3.11+" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat&logo=python&logoColor=white" />
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-0B84F3?style=flat" /></a>
@@ -33,7 +33,7 @@
 
 ## What is Gemini.app Repair Kit?
 
-Gemini.app Repair Kit is an **unofficial community patch kit for `/Applications/Gemini.app`** on Apple Silicon Macs running macOS `< 26.2` (verified on macOS 15.8.3 with `Gemini.app` `1.147.5.1526` and `1.147.6.1557`). It applies seven targeted ARM64 machine-code patches to fix startup and account-switching deadlocks as well as SwiftUI/AppKit rendering regressions, then re-signs the app bundle ad-hoc with its original non-sandboxed entitlements.
+Gemini.app Repair Kit is an **unofficial community patch kit for `/Applications/Gemini.app`** on Apple Silicon Macs running macOS `< 26.2` (verified on macOS 15.8.3 with `Gemini.app` `1.147.5.1526`, `1.147.6.1557`, and `1.150.3.1601`). It applies seven targeted ARM64 machine-code patches to fix startup and account-switching deadlocks as well as SwiftUI/AppKit rendering regressions, then re-signs the app bundle ad-hoc with its original non-sandboxed entitlements.
 
 **Gemini.app Repair Kit = 7 surgical ARM64 patches + pattern-match fallback + ad-hoc `codesign` + SHA-256-verified restore.**
 
@@ -77,15 +77,15 @@ _Text fallback: quit `Gemini.app` → back up the original Mach-O binary → app
 
 ## Included Patches
 
-| Patch | `1.147.5.1526` | `1.147.6.1557` | Status | Root Cause & Fix |
-|---|---|---|---|---|
-| **P1** | `0x034F68E0` | `0x0354D5A0` | ✅ Applied | Startup AB-BA deadlock: branches past `SpellCheckerWarmUpTask` during main-thread `OmnichatWindow` init (`b +0x1c`) |
-| **P2** | `0x034CEBF4` | `0x035258B4` | ✅ Applied | Missing icons & avatar: early `ret` from `CALayerFlippedContentsWorkaround.install()` so `SwiftUI.ImageLayer` contents are preserved on macOS `< 26.2` |
-| **P3a** | `0x0568B88C` | `0x056E2760` | ✅ Applied | Navbar text clipping: clamps `clampedToolbarFontScale` to `<= 1.0` |
-| **P3b** | `0x0568B8A8` | `0x056E277C` | ✅ Applied | Navbar icon clipping: clamps `iconButtonSize` scale to `<= 1.0` |
-| **P3c** | `0x0568B8C8` | `0x056E279C` | ✅ Applied | Navbar pill height: sets `toolbarPillHeight` to `36.0pt` |
-| **P3d** | `0x0568B900` | `0x056E27D4` | ✅ Applied | Navbar pill vertical alignment: sets `toolbarPillTopPadding` to `6.0pt` |
-| **P4** | `0x027B652C` | `0x0280D7EC` | ✅ Applied | Account switch / add-account freeze: skips lazy `NSUserDefaults.setBool(true, ...)` inside `ClearcutServiceImpl.shouldSendCrashesAndUsageData` (`b +0x60`) |
+| Patch | `1.147.5.1526` | `1.147.6.1557` | `1.150.3.1601` | Status | Root Cause & Fix |
+|---|---|---|---|---|---|
+| **P1** | `0x034F68E0` | `0x0354D5A0` | `0x03961930` | ✅ Applied | Startup AB-BA deadlock: branches past `SpellCheckerWarmUpTask` during main-thread `OmnichatWindow` init (`b +0x1c`) |
+| **P2** | `0x034CEBF4` | `0x035258B4` | `0x039320FC` | ✅ Applied | Missing icons & avatar: early `ret` from `CALayerFlippedContentsWorkaround.install()` so `SwiftUI.ImageLayer` contents are preserved on macOS `< 26.2` |
+| **P3a** | `0x0568B88C` | `0x056E2760` | `0x06224BAC` | ✅ Applied | Navbar text clipping: clamps `clampedToolbarFontScale` to `<= 1.0` |
+| **P3b** | `0x0568B8A8` | `0x056E277C` | `0x06224BC8` | ✅ Applied | Navbar icon clipping: clamps `iconButtonSize` scale to `<= 1.0` |
+| **P3c** | `0x0568B8C8` | `0x056E279C` | `0x06224BE8` | ✅ Applied | Navbar pill height: sets `toolbarPillHeight` to `36.0pt` |
+| **P3d** | `0x0568B900` | `0x056E27D4` | `0x06224C20` | ✅ Applied | Navbar pill vertical alignment: sets `toolbarPillTopPadding` to `6.0pt` |
+| **P4** | `0x027B652C` | `0x0280D7EC` | `0x02B8B058` | ✅ Applied | Account switch / add-account freeze: skips lazy `NSUserDefaults.setBool(true, ...)` inside `ClearcutServiceImpl.shouldSendCrashesAndUsageData` (`b +0x60`) |
 
 ---
 
@@ -94,7 +94,7 @@ _Text fallback: quit `Gemini.app` → back up the original Mach-O binary → app
 ### Prerequisites
 
 - **macOS on Apple Silicon (ARM64)** (tested on macOS `15.8.3`)
-- **`/Applications/Gemini.app`** installed (exact offsets for `1.147.5.1526` and `1.147.6.1557`, plus pattern fallback)
+- **`/Applications/Gemini.app`** installed (exact offsets for `1.147.5.1526`, `1.147.6.1557`, and `1.150.3.1601`, plus pattern fallback)
 - **Python** `>= 3.8` for [`scripts/patch_gemini.py`](scripts/patch_gemini.py), or `>= 3.11` for [`restore_gemini.py`](restore_gemini.py) (uses `hashlib.file_digest`)
 - **Xcode Command Line Tools** (`codesign` binary)
 
@@ -158,15 +158,15 @@ _Text fallback: `scripts/patch_gemini.py` patches the installed binary in place 
 
 ### Patch Specification
 
-| ID | Target Symbol / Area | `1.147.5.1526` Offset | `1.147.6.1557` Offset | Patched Hex |
-|---|---|---|---|---|
-| `P1` | `SpellCheckerWarmUpTask` branch | `0x034F68E0` | `0x0354D5A0` | `07000014` |
-| `P2` | `CALayerFlippedContentsWorkaround.install` | `0x034CEBF4` | `0x035258B4` | `c0035fd6` |
-| `P3a` | `clampedToolbarFontScale` | `0x0568B88C` | `0x056E2760` | `01106e1e0020611e20cc601ec0035fd6` |
-| `P3b` | `iconButtonSize` | `0x0568B8A8` | `0x056E277C` | `01106e1e1f2003d51f2003d51f2003d5` |
-| `P3c` | `toolbarPillHeight` | `0x0568B8C8` | `0x056E279C` | `4808e8d20001679ec0035fd6` |
-| `P3d` | `toolbarPillTopPadding` | `0x0568B900` | `0x056E27D4` | `0010631ec0035fd6` |
-| `P4` | `ClearcutServiceImpl.shouldSendCrashesAndUsageData` | `0x027B652C` | `0x0280D7EC` | `18000014` |
+| ID | Target Symbol / Area | `1.147.5.1526` | `1.147.6.1557` | `1.150.3.1601` | Patched Hex |
+|---|---|---|---|---|---|
+| `P1` | `SpellCheckerWarmUpTask` branch | `0x034F68E0` | `0x0354D5A0` | `0x03961930` | `07000014` |
+| `P2` | `CALayerFlippedContentsWorkaround.install` | `0x034CEBF4` | `0x035258B4` | `0x039320FC` | `c0035fd6` |
+| `P3a` | `clampedToolbarFontScale` | `0x0568B88C` | `0x056E2760` | `0x06224BAC` | `01106e1e0020611e20cc601ec0035fd6` |
+| `P3b` | `iconButtonSize` | `0x0568B8A8` | `0x056E277C` | `0x06224BC8` | `01106e1e1f2003d51f2003d51f2003d5` |
+| `P3c` | `toolbarPillHeight` | `0x0568B8C8` | `0x056E279C` | `0x06224BE8` | `4808e8d20001679ec0035fd6` |
+| `P3d` | `toolbarPillTopPadding` | `0x0568B900` | `0x056E27D4` | `0x06224C20` | `0010631ec0035fd6` |
+| `P4` | `ClearcutServiceImpl.shouldSendCrashesAndUsageData` | `0x027B652C` | `0x0280D7EC` | `0x02B8B058` | `18000014` |
 
 ### Repository Contents
 
